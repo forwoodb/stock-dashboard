@@ -11,7 +11,7 @@ const Navbar3 = () => {
       <nav className={`${styles.navbar} bg-green-700`}>
         <div className={`${styles.container}`}>
           <a href={"/"} className="text-xl font-bold text-white">
-            Stock Tracker
+            Stock Dashboard
             {/* <Image
               src="https://placehold.co/180x120"
               alt=""

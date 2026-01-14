@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = () => {
   mongoose
-    .connect(process.env.LDB_URL)
+    .connect(process.env.MONGODB_URL)
     .then(() => {
       console.log("Connected to MongoDB");
     })

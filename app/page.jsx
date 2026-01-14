@@ -18,7 +18,7 @@ export default function Home() {
   const router = useRouter();
 
   const fetchData = () => {
-    fetch("/api/tracker/stocks")
+    fetch("/api/dashboard/stocks")
       .then((res) => {
         return res.json();
       })
@@ -54,7 +54,7 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/tracker/stocks", {
+    fetch("/api/dashboard/stocks", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -72,7 +72,7 @@ export default function Home() {
   };
 
   const deleteStock = (id) => {
-    fetch(`/api/tracker/stocks/${id}`, {
+    fetch(`/api/dashboard/stocks/${id}`, {
       method: "DELETE",
     });
 
@@ -105,7 +105,7 @@ export default function Home() {
     e.preventDefault();
     const id = updateStock._id;
 
-    fetch(`/api/tracker/stocks/${id}`, {
+    fetch(`/api/dashboard/stocks/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
