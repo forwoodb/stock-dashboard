@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Button from "../components/Button";
 import AuthForm from "../components/AuthForm";

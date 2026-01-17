@@ -8,7 +8,7 @@ connectDB();
 
 export async function GET() {
   const cookieStore = await cookies();
-  const cookie = cookieStore.get("jwt-st");
+  const cookie = cookieStore.get("jwt-sd");
   let token = null;
   if (cookie.value) {
     token = cookie.value;
@@ -25,7 +25,7 @@ export async function GET() {
 export async function POST(req) {
   const body = await req.json();
   const cookieStore = cookies();
-  const cookie = (await cookieStore).get("jwt-st");
+  const cookie = (await cookieStore).get("jwt-sd");
   let token = null;
   if (cookie.value) {
     token = cookie.value;

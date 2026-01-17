@@ -11,7 +11,7 @@ connectDB();
 export async function GET() {
   // Get user id
   const cookieStore = await cookies();
-  const cookie = cookieStore.get("jwt-st");
+  const cookie = cookieStore.get("jwt-sd");
   let token = null;
   if (cookie.value) {
     token = cookie.value;
