@@ -89,10 +89,16 @@ const AuthForm = ({ mode }) => {
           {mode === "login" ? "Register" : "Log In"}
         </Link>
       </p>
-      <p>Or try it out</p>
-      <Button click={demoLogin} border>
-        Demo Login
-      </Button>
+      {mode === "login" ? (
+        <>
+          <p>Or try it out</p>
+          <Button click={demoLogin} border>
+            Demo Login
+          </Button>
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 };
