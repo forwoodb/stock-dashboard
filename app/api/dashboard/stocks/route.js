@@ -7,17 +7,16 @@ import jwt from "jsonwebtoken";
 connectDB();
 
 export async function GET() {
-  // const cookieStore = await cookies();
-  // const cookie = cookieStore.get("jwt-st");
-  // let token = null;
-  // if (cookie.value) {
-  //   token = cookie.value;
-  // }
-  // const verify = jwt.verify(token, process.env.JWT_SECRET);
-  // // console.log(verify);
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get("jwt-st");
+  let token = null;
+  if (cookie.value) {
+    token = cookie.value;
+  }
+  const verify = jwt.verify(token, process.env.JWT_SECRET);
+  // console.log(verify);
 
-  const stocks = await Stock.find({});
-  // const stocks = await Stock.find({ userId: verify._id });
+  const stocks = await Stock.find({ userId: verify._id });
   console.log(stocks);
 
   return NextResponse.json(stocks);
