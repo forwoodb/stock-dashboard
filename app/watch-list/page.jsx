@@ -39,11 +39,9 @@ const WatchList = () => {
 
     const fetchLocalStorage = () => {
       const accBal = localStorage.getItem("accountBalance");
-      console.log(accBal);
       setAccountBalance(accBal);
 
       const stopLoss = localStorage.getItem("stopLoss");
-      console.log(stopLoss);
       setStopLoss(stopLoss);
     };
 
@@ -76,7 +74,6 @@ const WatchList = () => {
     fetch(`/api/dashboard/watch-list/${id}`, {
       method: "PUT",
     });
-    // console.log(id);
     const list = stocks.filter((stock) => {
       return stock._id !== id;
     });
@@ -86,7 +83,6 @@ const WatchList = () => {
   const editStock = (stock) => {
     setEdit(true);
     setUpdateStock(stock);
-    console.log(stock);
   };
 
   const handleChange = (e) => {
@@ -102,7 +98,6 @@ const WatchList = () => {
   const submitUpdate = (e) => {
     e.preventDefault();
     const id = updateStock._id;
-    // console.log(id);
 
     fetch(`/api/dashboard/stocks/${id}`, {
       method: "PUT",

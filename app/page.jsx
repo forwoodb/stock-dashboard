@@ -26,6 +26,8 @@ export default function Home() {
         if (!data) {
           router.push("/login");
         }
+        console.log(data);
+
         setStocks(data);
       })
       .catch((err) => {
