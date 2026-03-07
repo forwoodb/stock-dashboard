@@ -24,11 +24,20 @@ const PositionSizes = () => {
         return res.json();
       })
       .then((stocks) => {
+        let positions = [];
+
+        stocks.forEach((stock) => {
+          if (stock.position === true) {
+            positions.push(stock);
+          }
+        });
+
         if (!stocks) {
           router.push("/login");
         }
-        console.log(stocks);
-        setStocks(stocks);
+
+        console.log(positions);
+        setStocks(positions);
       })
       .catch((err) => {
         console.log(err);
@@ -207,6 +216,7 @@ const PositionSizes = () => {
                       </th>
                       <th></th>
                       <th></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -235,6 +245,14 @@ const PositionSizes = () => {
                             </td>
                             <td className="entry">
                               {getEntryPrice(stock["Close"], stock["10D"])}
+                            </td>
+                            <td>
+                              <Button
+                                click={() => editStock(stock)}
+                                className="bg-green-700 text-white"
+                              >
+                                Purchase
+                              </Button>
                             </td>
                             <td>
                               <Button

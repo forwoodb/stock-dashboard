@@ -24,10 +24,20 @@ const WatchList = () => {
         return res.json();
       })
       .then((data) => {
+        let list = [];
+
+        data.forEach((stock) => {
+          if (stock.watchList === true) {
+            list.push(stock);
+          }
+        });
+
         if (!data) {
           router.push("/login");
         }
-        setStocks(data);
+
+        console.log(list);
+        setStocks(list);
       })
       .catch((err) => {
         console.log(err);
