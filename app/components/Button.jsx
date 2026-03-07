@@ -12,7 +12,6 @@ const Button = ({ children, click, className = "", border = false }) => {
           align-middle 
           px-3
           py-2
-          m-1
           cursor-pointer 
           rounded
           ${border ? "border border-black" : ""}

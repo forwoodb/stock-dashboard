@@ -6,6 +6,7 @@ import StopLossForm from "../components/StopLossForm";
 import AccountPositions from "../components/AccountPositions";
 import Button from "../components/Button";
 import EditForm from "../components/EditForm";
+import TradeForm from "../components/TradeForm";
 
 const PositionSizes = () => {
   const [stocks, setStocks] = useState([]);
@@ -13,8 +14,10 @@ const PositionSizes = () => {
   const [updateAccBal, setUpdateAccBal] = useState("");
   const [stopLoss, setStopLoss] = useState("");
   const [updateStopLoss, setUpdateStopLoss] = useState("");
-  const [edit, setEdit] = useState(false);
-  const [updateStock, setUpdateStock] = useState();
+  // const [edit, setEdit] = useState(false);
+  const [trade, setTrade] = useState(false);
+  // const [updateStock, setUpdateStock] = useState();
+  const [transaction, setTransaction] = useState();
 
   const router = useRouter();
 
@@ -91,15 +94,21 @@ const PositionSizes = () => {
     setStocks(list);
   };
 
-  const editStock = (stock) => {
-    setEdit(true);
-    setUpdateStock(stock);
+  // const editStock = (stock) => {
+  const tradeStock = (stock) => {
+    // setEdit(true);
+    setTrade(true);
+    // setUpdateStock(stock);
+    setTransaction({
+      ...stock,
+      price: stock.Close,
+    });
     console.log(stock);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUpdateStock((prev) => {
+    setTransaction((prev) => {
       return {
         ...prev,
         [name]: value,
@@ -107,25 +116,26 @@ const PositionSizes = () => {
     });
   };
 
-  const submitUpdate = (e) => {
+  // const submitUpdate = (e) => {
+  const submitTrade = (e) => {
     e.preventDefault();
-    const id = updateStock._id;
-    // console.log(id);
+    // const id = transaction._id;
+    console.log(transaction);
 
-    fetch(`/api/dashboard/stocks/${id}`, {
-      method: "PUT",
+    fetch(`/api/dashboard/trades`, {
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(updateStock),
+      body: JSON.stringify(transaction),
     }).then(() => {
       return fetchData();
     });
 
-    const data = fetchData();
-    console.log(data);
+    // const data = fetchData();
+    // console.log(data);
 
-    setEdit(false);
+    setTrade(false);
   };
 
   const avgAmt = Number(accountBalance) / Number(stocks.length);
@@ -173,10 +183,15 @@ const PositionSizes = () => {
       <main className="bg-gray-100">
         <div className="container m-auto">
           <h2 className="py-4 text-3xl">Position Sizes</h2>
-          {edit ? (
-            <EditForm
-              stock={updateStock}
-              submit={submitUpdate}
+          {trade ? (
+            // <EditForm
+            //   stock={updateStock}
+            //   submit={submitUpdate}
+            //   change={handleChange}
+            // />
+            <TradeForm
+              stock={transaction}
+              submit={submitTrade}
               change={handleChange}
             />
           ) : (
@@ -284,10 +299,10 @@ const PositionSizes = () => {
                             </td>
                             <td>
                               <Button
-                                click={() => editStock(stock)}
+                                click={() => tradeStock(stock)}
                                 className="bg-green-700 text-white"
                               >
-                                Purchase
+                                Trade
                               </Button>
                             </td>
                             <td>
