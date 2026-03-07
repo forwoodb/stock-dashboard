@@ -36,7 +36,7 @@ const WatchList = () => {
           router.push("/login");
         }
 
-        console.log(list);
+        // console.log(list);
         setStocks(list);
       })
       .catch((err) => {
@@ -122,6 +122,7 @@ const WatchList = () => {
     setEdit(false);
   };
 
+  // Calculations
   const avgAmt = Number(accountBalance) / Number(stocks.length);
   const avgPos = avgAmt.toFixed(2);
   const maxAmt = Number(stopLoss) * Number(avgPos);
@@ -129,9 +130,40 @@ const WatchList = () => {
   const stopLossDecimal = stopLoss / 100;
 
   const getEntryPrice = (close, ma) => {
+    if (!close || !ma) {
+      return 0;
+    }
     const entryPct = (close - ma) / close;
     const entryPrice = ((stopLossDecimal / entryPct) * avgAmt).toFixed(2);
     return entryPrice;
+  };
+
+  const sortTable = (key) => {
+    console.log(key);
+
+    const sorted = stocks
+      .map((stock) => {
+        stock["5D"] = Number(stock["5D"]);
+        stock["10D"] = Number(stock["10D"]);
+        stock["20D"] = Number(stock["20D"]);
+        stock["50D"] = Number(stock["50D"]);
+        return {
+          ...stock,
+          entry: Number(getEntryPrice(stock["Close"], stock["10D"])),
+        };
+      })
+      .sort((a, b) => {
+        // const sorted = [...stocks].sort((a, b) => {
+        if (key === "ticker") {
+          return a[key].localeCompare(b[key]);
+        }
+        if (key === "entry") {
+          return Number(b[key]) - Number(a[key]);
+        }
+        return Number(a[key]) - Number(b[key]);
+      });
+    console.log(sorted);
+    setStocks(sorted);
   };
 
   return (
@@ -175,7 +207,11 @@ const WatchList = () => {
                 >
                   <thead>
                     <tr>
-                      <th scope="col" id="dataTickerCol">
+                      <th
+                        scope="col"
+                        id="dataTickerCol"
+                        onClick={() => sortTable("ticker")}
+                      >
                         Ticker
                       </th>
                       <th scope="col" id="timeCol">
@@ -184,10 +220,18 @@ const WatchList = () => {
                       <th scope="col" id="closeCol">
                         Close
                       </th>
-                      <th scope="col" id="fiveDCol">
+                      <th
+                        scope="col"
+                        id="fiveDCol"
+                        onClick={() => sortTable("5D")}
+                      >
                         5D
                       </th>
-                      <th scope="col" id="tenDCol">
+                      <th
+                        scope="col"
+                        id="tenDCol"
+                        onClick={() => sortTable("10D")}
+                      >
                         10D
                       </th>
                       <th scope="col" id="twentyDCol">
@@ -205,7 +249,11 @@ const WatchList = () => {
                       <th scope="col" id="posSizeCol">
                         Position Size
                       </th>
-                      <th scope="col" id="entryCol">
+                      <th
+                        scope="col"
+                        id="entryCol"
+                        onClick={() => sortTable("entry")}
+                      >
                         Entry
                       </th>
                       <th></th>
@@ -219,10 +267,17 @@ const WatchList = () => {
                         stock["watchList"] === undefined
                       ) {
                         return (
-                          <tr key={stock._id}>
+                          <tr
+                            key={stock._id}
+                            className={`${stock["Close"] < stock["10D"] && "text-red-500"}`}
+                          >
                             <td>{stock["ticker"]}</td>
                             <td className="time">{stock["Time"]}</td>
-                            <td className="close-price">{stock["Close"]}</td>
+                            <td
+                              className={`${stock["Close"] < stock["10D"] && "text-red-500"}`}
+                            >
+                              {stock["Close"]}
+                            </td>
                             <td className="fifty">{stock["5D"]}</td>
                             <td className="fifty">{stock["10D"]}</td>
                             <td className="fifty">{stock["20D"]}</td>

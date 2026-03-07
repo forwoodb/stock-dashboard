@@ -183,28 +183,32 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  {stocks.map((stock) => {
-                    return (
-                      <tr key={stock._id}>
-                        <td>{stock.ticker}</td>
-                        <td>{stock.company}</td>
-                        <td>{stock.averageCost}</td>
-                        <td>
-                          <Button click={() => editStock(stock)} border>
-                            Edit
-                          </Button>
-                        </td>
-                        <td>
-                          <Button
-                            click={() => deleteStock(stock._id)}
-                            className="bg-red-800 text-white"
-                          >
-                            Delete
-                          </Button>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {stocks
+                    .sort((a, b) => {
+                      return a.ticker.localeCompare(b.ticker);
+                    })
+                    .map((stock) => {
+                      return (
+                        <tr key={stock._id}>
+                          <td>{stock.ticker}</td>
+                          <td>{stock.company}</td>
+                          <td>{stock.averageCost}</td>
+                          <td>
+                            <Button click={() => editStock(stock)} border>
+                              Edit
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              click={() => deleteStock(stock._id)}
+                              className="bg-red-800 text-white"
+                            >
+                              Delete
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>

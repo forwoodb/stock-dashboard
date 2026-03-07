@@ -140,6 +140,34 @@ const PositionSizes = () => {
     return entryPrice;
   };
 
+  const sortTable = (key) => {
+    console.log(key);
+
+    const sorted = stocks
+      .map((stock) => {
+        stock["5D"] = Number(stock["5D"]);
+        stock["10D"] = Number(stock["10D"]);
+        stock["20D"] = Number(stock["20D"]);
+        stock["50D"] = Number(stock["50D"]);
+        return {
+          ...stock,
+          entry: Number(getEntryPrice(stock["Close"], stock["10D"])),
+        };
+      })
+      .sort((a, b) => {
+        // const sorted = [...stocks].sort((a, b) => {
+        if (key === "ticker") {
+          return a[key].localeCompare(b[key]);
+        }
+        if (key === "entry") {
+          return Number(b[key]) - Number(a[key]);
+        }
+        return Number(a[key]) - Number(b[key]);
+      });
+    console.log(sorted);
+    setStocks(sorted);
+  };
+
   return (
     <div>
       <main className="bg-gray-100">
@@ -181,7 +209,11 @@ const PositionSizes = () => {
                 >
                   <thead>
                     <tr>
-                      <th scope="col" id="dataTickerCol">
+                      <th
+                        scope="col"
+                        id="dataTickerCol"
+                        onClick={() => sortTable("ticker")}
+                      >
                         Ticker
                       </th>
                       <th scope="col" id="timeCol">
@@ -211,7 +243,11 @@ const PositionSizes = () => {
                       <th scope="col" id="posSizeCol">
                         Position Size
                       </th>
-                      <th scope="col" id="entryCol">
+                      <th
+                        scope="col"
+                        id="entryCol"
+                        onClick={() => sortTable("entry")}
+                      >
                         Entry
                       </th>
                       <th></th>
