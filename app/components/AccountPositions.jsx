@@ -9,7 +9,7 @@ const AccountPositions = ({
   click,
 }) => {
   const runPython = () => {
-    fetch("/api/tracker/run-python");
+    fetch("/api/dashboard/run-python");
   };
 
   return (
