@@ -186,7 +186,7 @@ const PositionSizes = () => {
   return (
     <div>
       <main className="bg-gray-100">
-        <div className="container m-auto">
+        <div className="w-[95%] m-auto">
           <h2 className="py-4 text-3xl">Position Sizes</h2>
           {trade ? (
             // <EditForm
@@ -222,125 +222,119 @@ const PositionSizes = () => {
                   maxPos={maxPos}
                 />
               </div>
-              <div className="container">
-                <table
-                  id="stocks-table"
-                  className="table table-auto w-full mt-3"
-                >
-                  <thead>
-                    <tr>
-                      <th
-                        scope="col"
-                        id="dataTickerCol"
-                        onClick={() => sortTable("ticker")}
-                      >
-                        Ticker
-                      </th>
-                      <th scope="col" id="timeCol">
-                        Time
-                      </th>
-                      <th scope="col" id="closeCol">
-                        Close
-                      </th>
-                      <th scope="col" id="fiveDCol">
-                        5D
-                      </th>
-                      <th scope="col" id="tenDCol">
-                        10D
-                      </th>
-                      <th scope="col" id="twentyDCol">
-                        20D
-                      </th>
-                      <th scope="col" id="fiftyDCol">
-                        50D
-                      </th>
-                      <th scope="col" id="fiftyDCol">
-                        100D
-                      </th>
-                      <th scope="col" id="fiftyDCol">
-                        200D
-                      </th>
-                      <th scope="col" id="avgCostCol">
-                        Avg Cost
-                      </th>
-                      <th scope="col" id="posSizePctCol">
-                        % &gt; MA
-                      </th>
-                      <th scope="col" id="posSizeCol">
-                        Position Size
-                      </th>
-                      <th
-                        scope="col"
-                        id="entryCol"
-                        onClick={() => sortTable("entry")}
-                      >
-                        Entry
-                      </th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {stocks.map((stock) => {
-                      if (stock["position"] === true) {
-                        return (
-                          <tr key={stock._id}>
-                            <td>{stock["ticker"]}</td>
-                            <td className="time">{stock["Time"]}</td>
-                            <td className="close-price">{stock["Close"]}</td>
-                            <td className="fifty">{stock["5D"]}</td>
-                            <td className="fifty">{stock["10D"]}</td>
-                            <td className="fifty">{stock["20D"]}</td>
-                            <td className="fifty">{stock["50D"]}</td>
-                            <td className="fifty">{stock["100D"]}</td>
-                            <td className="fifty">{stock["200D"]}</td>
-                            <td className="avg-cost">{stock["averageCost"]}</td>
-                            <td className="pct-ma">
-                              {(
-                                ((Number(stock["Close"]) -
-                                  Number(stock["10D"])) /
-                                  Number(stock["10D"])) *
-                                100
-                              ).toFixed(2)}
-                            </td>
-                            <td className="pos-size">
-                              {stock["positionSize"]}
-                            </td>
-                            <td className="entry">
-                              {getEntryPrice(stock["Close"], stock["10D"])}
-                            </td>
-                            <td>
-                              <Button
-                                click={() => tradeStock(stock)}
-                                className="bg-green-700 text-white"
-                              >
-                                Trade
-                              </Button>
-                            </td>
-                            <td>
-                              <Button
-                                click={() => editStock(stock)}
-                                className="bg-green-700 text-white"
-                              >
-                                Edit
-                              </Button>
-                            </td>
-                            <td>
-                              <Button
-                                click={() => addWatchList(stock._id)}
-                                className="bg-green-700 text-white"
-                              >
-                                Watchlist
-                              </Button>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    })}
-                  </tbody>
-                </table>
-              </div>
+              {/* <div className="container"> */}
+              <table id="stocks-table" className="w-full mt-3">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      id="dataTickerCol"
+                      onClick={() => sortTable("ticker")}
+                    >
+                      Ticker
+                    </th>
+                    <th scope="col" id="timeCol">
+                      Time
+                    </th>
+                    <th scope="col" id="closeCol">
+                      Close
+                    </th>
+                    <th scope="col" id="fiveDCol">
+                      5D
+                    </th>
+                    <th scope="col" id="tenDCol">
+                      10D
+                    </th>
+                    <th scope="col" id="twentyDCol">
+                      20D
+                    </th>
+                    <th scope="col" id="fiftyDCol">
+                      50D
+                    </th>
+                    <th scope="col" id="oneHundredDCol">
+                      100D
+                    </th>
+                    <th scope="col" id="twoHundredDCol">
+                      200D
+                    </th>
+                    <th scope="col" id="avgCostCol">
+                      Avg Cost
+                    </th>
+                    <th scope="col" id="posSizePctCol">
+                      % &gt; MA
+                    </th>
+                    <th scope="col" id="posSizeCol">
+                      Position Size
+                    </th>
+                    <th
+                      scope="col"
+                      id="entryCol"
+                      onClick={() => sortTable("entry")}
+                    >
+                      Entry
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stocks.map((stock) => {
+                    if (stock["position"] === true) {
+                      return (
+                        <tr key={stock._id}>
+                          <td>{stock["ticker"]}</td>
+                          <td className="time">{stock["Time"]}</td>
+                          <td className="close-price">{stock["Close"]}</td>
+                          <td className="fifty">{stock["5D"]}</td>
+                          <td className="fifty">{stock["10D"]}</td>
+                          <td className="fifty">{stock["20D"]}</td>
+                          <td className="fifty">{stock["50D"]}</td>
+                          <td className="fifty">{stock["100D"]}</td>
+                          <td className="fifty">{stock["200D"]}</td>
+                          <td className="avg-cost">{stock["averageCost"]}</td>
+                          <td className="pct-ma">
+                            {(
+                              ((Number(stock["Close"]) - Number(stock["10D"])) /
+                                Number(stock["10D"])) *
+                              100
+                            ).toFixed(2)}
+                          </td>
+                          <td className="pos-size">{stock["positionSize"]}</td>
+                          <td className="entry">
+                            {getEntryPrice(stock["Close"], stock["10D"])}
+                          </td>
+                          <td>
+                            <Button
+                              click={() => tradeStock(stock)}
+                              className="bg-green-700 text-white"
+                            >
+                              Trade
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              click={() => editStock(stock)}
+                              className="bg-green-700 text-white"
+                            >
+                              Edit
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              click={() => addWatchList(stock._id)}
+                              className="bg-green-700 text-white"
+                            >
+                              Watchlist
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  })}
+                </tbody>
+              </table>
+              {/* </div> */}
             </>
           )}
         </div>
