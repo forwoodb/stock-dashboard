@@ -20,14 +20,14 @@ export default function Home() {
   const fetchData = () => {
     fetch("/api/dashboard/stocks")
       .then((res) => {
-        return res.json();
+        if (res.status === 401) {
+          router.push("/login");
+          return [];
+        } else {
+          return res.json();
+        }
       })
       .then((data) => {
-        if (!data) {
-          router.push("/login");
-        }
-        console.log(data);
-
         setStocks(data);
       })
       .catch((err) => {

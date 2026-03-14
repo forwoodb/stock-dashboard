@@ -3,23 +3,33 @@ import connectDB from "@/app/lib/db";
 import Stock from "@/app/models/Stock";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import { redirect } from "next/dist/server/api-utils";
 
 connectDB();
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get("jwt-sd");
-  let token = null;
-  if (cookie.value) {
-    token = cookie.value;
+  try {
+    const cookieStore = await cookies();
+    const cookie = cookieStore.get("jwt-sd");
+
+    let token = null;
+    if (cookie.value) {
+      token = cookie.value;
+    }
+    const verify = jwt.verify(token, process.env.JWT_SECRET);
+    // console.log(verify);
+
+    const stocks = await Stock.find({ userId: verify._id });
+    console.log(stocks);
+
+    return NextResponse.json(stocks);
+  } catch (error) {
+    // console.log(error.name);
+    if (error.name === "TokenExpiredError") {
+      return NextResponse.json({ error: "Token Expired" }, { status: 401 });
+    }
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const verify = jwt.verify(token, process.env.JWT_SECRET);
-  // console.log(verify);
-
-  const stocks = await Stock.find({ userId: verify._id });
-  console.log(stocks);
-
-  return NextResponse.json(stocks);
 }
 
 export async function POST(req) {

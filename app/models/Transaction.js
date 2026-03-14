@@ -15,6 +15,12 @@ const transactionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  fiveDayAvg: Number,
+  tenDayAvg: Number,
+  twentyDayAvg: Number,
+  fiftyDayAvg: Number,
+  oneHundredDayAvg: Number,
+  twoHundredDayAvg: Number,
 });
 
 export default mongoose.models.Transaction ||
