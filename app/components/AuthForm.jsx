@@ -52,7 +52,6 @@ const AuthForm = ({ mode }) => {
             type="text"
             name="username"
             id="username"
-            value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="m-2 bg-white"
           />
@@ -63,7 +62,6 @@ const AuthForm = ({ mode }) => {
             type="email"
             name="email"
             id="email"
-            value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="m-2 bg-white"
           />
@@ -74,7 +72,6 @@ const AuthForm = ({ mode }) => {
             type="password"
             name="password"
             id="password"
-            value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="m-2 bg-white"
           />

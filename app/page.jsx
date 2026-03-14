@@ -20,7 +20,7 @@ export default function Home() {
   const fetchData = () => {
     fetch("/api/dashboard/stocks")
       .then((res) => {
-        if (res.status === 401) {
+        if (res.status === 500) {
           router.push("/login");
           return [];
         } else {

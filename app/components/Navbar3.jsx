@@ -38,6 +38,9 @@ const Navbar3 = () => {
             <li>
               <a href={"watch-list"}>Watch List</a>
             </li>
+            <li>
+              <a href={"trades"}>Trades</a>
+            </li>
           </ul>
         </div>
       </nav>

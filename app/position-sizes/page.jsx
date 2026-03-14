@@ -39,7 +39,7 @@ const PositionSizes = () => {
           router.push("/login");
         }
 
-        console.log(positions);
+        // console.log(positions);
         setStocks(positions);
       })
       .catch((err) => {
@@ -52,11 +52,11 @@ const PositionSizes = () => {
 
     const fetchLocalStorage = () => {
       const accBal = localStorage.getItem("accountBalance");
-      console.log(accBal);
+      // console.log(accBal);
       setAccountBalance(accBal);
 
       const stopLoss = localStorage.getItem("stopLoss");
-      console.log(stopLoss);
+      // console.log(stopLoss);
       setStopLoss(stopLoss);
     };
 
@@ -80,7 +80,7 @@ const PositionSizes = () => {
   const updateSL = (e) => {
     e.preventDefault();
     localStorage.setItem("stopLoss", updateStopLoss);
-    console.log("click");
+    // console.log("click");
   };
 
   const addWatchList = (id) => {
@@ -102,8 +102,15 @@ const PositionSizes = () => {
     setTransaction({
       ...stock,
       price: stock.Close,
+      type: "buy" || stock.type,
+      fiveDayAvg: stock["5D"],
+      tenDayAvg: stock["10D"],
+      twentyDayAvg: stock["20D"],
+      fiftyDayAvg: stock["50D"],
+      oneHundredDayAvg: stock["100D"],
+      twoHundredDayAvg: stock["200D"],
     });
-    console.log(stock);
+    // console.log(stock);
   };
 
   const handleChange = (e) => {
@@ -119,7 +126,6 @@ const PositionSizes = () => {
   // const submitUpdate = (e) => {
   const submitTrade = (e) => {
     e.preventDefault();
-    // const id = transaction._id;
     console.log(transaction);
 
     fetch(`/api/dashboard/trades`, {
@@ -131,9 +137,6 @@ const PositionSizes = () => {
     }).then(() => {
       return fetchData();
     });
-
-    // const data = fetchData();
-    // console.log(data);
 
     setTrade(false);
   };
@@ -151,7 +154,7 @@ const PositionSizes = () => {
   };
 
   const sortTable = (key) => {
-    console.log(key);
+    // console.log(key);
 
     const sorted = stocks
       .map((stock) => {
@@ -159,6 +162,8 @@ const PositionSizes = () => {
         stock["10D"] = Number(stock["10D"]);
         stock["20D"] = Number(stock["20D"]);
         stock["50D"] = Number(stock["50D"]);
+        stock["100D"] = Number(stock["100D"]);
+        stock["200D"] = Number(stock["200D"]);
         return {
           ...stock,
           entry: Number(getEntryPrice(stock["Close"], stock["10D"])),
@@ -174,7 +179,7 @@ const PositionSizes = () => {
         }
         return Number(a[key]) - Number(b[key]);
       });
-    console.log(sorted);
+    // console.log(sorted);
     setStocks(sorted);
   };
 
@@ -249,6 +254,12 @@ const PositionSizes = () => {
                       <th scope="col" id="fiftyDCol">
                         50D
                       </th>
+                      <th scope="col" id="fiftyDCol">
+                        100D
+                      </th>
+                      <th scope="col" id="fiftyDCol">
+                        200D
+                      </th>
                       <th scope="col" id="avgCostCol">
                         Avg Cost
                       </th>
@@ -282,6 +293,8 @@ const PositionSizes = () => {
                             <td className="fifty">{stock["10D"]}</td>
                             <td className="fifty">{stock["20D"]}</td>
                             <td className="fifty">{stock["50D"]}</td>
+                            <td className="fifty">{stock["100D"]}</td>
+                            <td className="fifty">{stock["200D"]}</td>
                             <td className="avg-cost">{stock["averageCost"]}</td>
                             <td className="pct-ma">
                               {(

@@ -8,28 +8,20 @@ import { redirect } from "next/dist/server/api-utils";
 connectDB();
 
 export async function GET() {
-  try {
-    const cookieStore = await cookies();
-    const cookie = cookieStore.get("jwt-sd");
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get("jwt-sd");
 
-    let token = null;
-    if (cookie.value) {
-      token = cookie.value;
-    }
-    const verify = jwt.verify(token, process.env.JWT_SECRET);
-    // console.log(verify);
-
-    const stocks = await Stock.find({ userId: verify._id });
-    console.log(stocks);
-
-    return NextResponse.json(stocks);
-  } catch (error) {
-    // console.log(error.name);
-    if (error.name === "TokenExpiredError") {
-      return NextResponse.json({ error: "Token Expired" }, { status: 401 });
-    }
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  let token = null;
+  if (cookie.value) {
+    token = cookie.value;
   }
+  const verify = jwt.verify(token, process.env.JWT_SECRET);
+  // console.log(verify);
+
+  const stocks = await Stock.find({ userId: verify._id });
+  console.log(stocks);
+
+  return NextResponse.json(stocks);
 }
 
 export async function POST(req) {

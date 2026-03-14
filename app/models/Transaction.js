@@ -10,7 +10,6 @@ const transactionSchema = new mongoose.Schema({
     required: true,
   },
   price: Number,
-  shares: Number,
   positionSize: {
     type: Number,
     required: true,
@@ -24,4 +23,4 @@ const transactionSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.Transaction ||
-  mongoose.Model("Transaction", transactionSchema);
+  mongoose.model("Transaction", transactionSchema);

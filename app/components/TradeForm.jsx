@@ -22,7 +22,13 @@ const TradeForm = ({ stock, submit, change }) => {
           <label htmlFor="type" className="form-label">
             Trade Type
           </label>
-          <select name="type" id="type" className="bg-white capitalize">
+          <select
+            name="type"
+            id="type"
+            value={"buy" || stock["type"]}
+            onChange={change}
+            className="bg-white capitalize"
+          >
             <option value="buy">buy</option>
             <option value="sell">sell</option>
           </select>
@@ -41,7 +47,7 @@ const TradeForm = ({ stock, submit, change }) => {
             className="bg-white"
           />
         </div>
-        <div className="flex flex-col pb-4">
+        {/* <div className="flex flex-col pb-4">
           <label htmlFor="averageCost" className="form-label">
             Shares
           </label>
@@ -53,7 +59,7 @@ const TradeForm = ({ stock, submit, change }) => {
             id="shares"
             className="bg-white"
           />
-        </div>
+        </div> */}
         <div className="flex flex-col pb-4">
           <label htmlFor="positionSize" className="form-label">
             Position Size
