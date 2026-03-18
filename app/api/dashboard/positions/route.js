@@ -3,10 +3,21 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
 import Stock from "@/app/models/Stock";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
 
 connectDB();
 
 export async function GET() {
+  // Get user id
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get("jwt-sd");
+  let token = null;
+  if (cookie.value) {
+    token = cookie.value;
+  }
+  const verify = jwt.verify(token, process.env.JWT_SECRET);
+
   // get csv data
   const csv_file = fs.readFileSync("stockData.csv", "utf-8");
   const stockData = parse(csv_file, { columns: true, skip_empty_lines: true });

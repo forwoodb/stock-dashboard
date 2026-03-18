@@ -11,11 +11,11 @@ const Page = async () => {
   if (!cookie) {
     redirect("/login");
   }
-  let token = null;
-  if (cookie.value) {
-    token = cookie.value;
-  }
-  const verify = jwt.verify(token, process.env.JWT_SECRET);
+  // let token = null;
+  // if (cookie.value) {
+  //   token = cookie.value;
+  // }
+  // const verify = jwt.verify(token, process.env.JWT_SECRET);
   return <PositionSizes />;
 };
 
