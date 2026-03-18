@@ -1,26 +1,25 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/app/lib/db";
-import Stock from "@/app/models/Stock";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
-import { redirect } from "next/dist/server/api-utils";
+// import Stock from "@/app/models/Stock";
+// import { cookies } from "next/headers";
+// import jwt from "jsonwebtoken";
 
 connectDB();
 
-export async function GET() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get("jwt-sd");
+// export async function GET() {
+//   const cookieStore = await cookies();
+//   const cookie = cookieStore.get("jwt-sd");
 
-  let token = null;
-  if (cookie.value) {
-    token = cookie.value;
-  }
-  const verify = jwt.verify(token, process.env.JWT_SECRET);
+//   let token = null;
+//   if (cookie.value) {
+//     token = cookie.value;
+//   }
+//   const verify = jwt.verify(token, process.env.JWT_SECRET);
 
-  const stocks = await Stock.find({ userId: verify._id });
+//   const stocks = await Stock.find({ userId: verify._id });
 
-  return NextResponse.json(stocks);
-}
+//   return NextResponse.json(stocks);
+// }
 
 export async function POST(req) {
   const body = await req.json();

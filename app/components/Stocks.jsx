@@ -5,8 +5,7 @@ import Button from "./Button";
 import { useRouter } from "next/navigation";
 import EditForm from "./EditForm";
 
-export default function Stocks() {
-  const [stocks, setStocks] = useState([]);
+export default function Stocks({ stocks }) {
   const [newStock, setNewStock] = useState({
     ticker: "",
     company: "",
@@ -16,17 +15,6 @@ export default function Stocks() {
   const [updateStock, setUpdateStock] = useState();
 
   const router = useRouter();
-
-  const fetchData = () => {
-    fetch("/api/dashboard/stocks")
-      .then((res) => res.json())
-      .then((data) => setStocks(data))
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const handleLogout = () => {
     fetch("/api/auth/logout");
