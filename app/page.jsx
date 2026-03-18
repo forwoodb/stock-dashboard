@@ -83,13 +83,11 @@ export default function Home() {
     });
 
     setStocks(list);
-    console.log(id);
   };
 
   const editStock = (stock) => {
     setEdit(true);
     setUpdateStock(stock);
-    console.log(stock);
   };
 
   const handleUpdateChange = (e) => {
@@ -117,7 +115,6 @@ export default function Home() {
       setEdit(false);
       fetchData();
     });
-    // console.log(id);
   };
 
   return (

@@ -16,10 +16,8 @@ export async function GET() {
     token = cookie.value;
   }
   const verify = jwt.verify(token, process.env.JWT_SECRET);
-  // console.log(verify);
 
   const stocks = await Stock.find({ userId: verify._id });
-  console.log(stocks);
 
   return NextResponse.json(stocks);
 }

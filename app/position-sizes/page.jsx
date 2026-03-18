@@ -24,6 +24,9 @@ const PositionSizes = () => {
   const fetchData = () => {
     fetch("/api/dashboard/positions")
       .then((res) => {
+        if (res.status === 500) {
+          router.push("/login");
+        }
         return res.json();
       })
       .then((stocks) => {
@@ -35,9 +38,9 @@ const PositionSizes = () => {
           }
         });
 
-        if (!stocks) {
-          router.push("/login");
-        }
+        // if (!stocks) {
+        //   router.push("/login");
+        // }
 
         // console.log(positions);
         setStocks(positions);

@@ -21,6 +21,9 @@ const WatchList = () => {
   const fetchData = () => {
     fetch("/api/dashboard/positions")
       .then((res) => {
+        if (res.status === 500) {
+          router.push("/login");
+        }
         return res.json();
       })
       .then((data) => {
@@ -32,11 +35,6 @@ const WatchList = () => {
           }
         });
 
-        if (!data) {
-          router.push("/login");
-        }
-
-        // console.log(list);
         setStocks(list);
       })
       .catch((err) => {
