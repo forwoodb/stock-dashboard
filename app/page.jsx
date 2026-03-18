@@ -10,6 +10,7 @@ const Page = async () => {
 
   const cookieStore = await cookies();
   const cookie = cookieStore.get("jwt-sd");
+
   if (!cookie) {
     redirect("/login");
   }

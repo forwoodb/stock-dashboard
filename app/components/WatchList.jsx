@@ -7,8 +7,13 @@ import StopLossForm from "./StopLossForm";
 import AccountPositions from "./AccountPositions";
 import EditForm from "./EditForm";
 
-const WatchList = () => {
-  const [stocks, setStocks] = useState([]);
+const WatchList = ({ merge }) => {
+  const [stocks, setStocks] = useState(
+    merge.filter((stock) => stock.watchList === true),
+  );
+  // const [stocks, setStocks] = useState(() =>
+  //   merge.filter((stock) => stock.watchList === true),
+  // );
   const [accountBalance, setAccountBalance] = useState("");
   const [updateAccBal, setUpdateAccBal] = useState("");
   const [stopLoss, setStopLoss] = useState("");
@@ -18,28 +23,9 @@ const WatchList = () => {
 
   const router = useRouter();
 
-  const fetchData = () => {
-    fetch("/api/dashboard/positions")
-      .then((res) => res.json())
-      .then((data) => {
-        let list = [];
-
-        data.forEach((stock) => {
-          if (stock.watchList === true) {
-            list.push(stock);
-          }
-        });
-
-        setStocks(list);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  console.log(stocks);
 
   useEffect(() => {
-    fetchData();
-
     const fetchLocalStorage = () => {
       const accBal = localStorage.getItem("accountBalance");
       setAccountBalance(accBal);
@@ -155,7 +141,7 @@ const WatchList = () => {
         }
         return Number(a[key]) - Number(b[key]);
       });
-    console.log(sorted);
+    // console.log(sorted);
     setStocks(sorted);
   };
 
