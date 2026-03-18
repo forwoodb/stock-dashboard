@@ -5,8 +5,11 @@ import jwt from "jsonwebtoken";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
 import Stock from "@/app/models/Stock";
+import connectDB from "../lib/db";
 
 const Page = async () => {
+  connectDB();
+
   const cookieStore = await cookies();
   const cookie = cookieStore.get("jwt-sd");
 

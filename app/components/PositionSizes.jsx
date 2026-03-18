@@ -8,8 +8,12 @@ import Button from "../components/Button";
 import EditForm from "../components/EditForm";
 import TradeForm from "../components/TradeForm";
 
-const PositionSizes = () => {
-  const [stocks, setStocks] = useState([]);
+const PositionSizes = ({ merge }) => {
+  const [stocks, setStocks] = useState(
+    merge.filter((stock) => {
+      return stock.position === true;
+    }),
+  );
   const [accountBalance, setAccountBalance] = useState("");
   const [updateAccBal, setUpdateAccBal] = useState("");
   const [stopLoss, setStopLoss] = useState("");
@@ -19,35 +23,7 @@ const PositionSizes = () => {
   // const [updateStock, setUpdateStock] = useState();
   const [transaction, setTransaction] = useState();
 
-  const router = useRouter();
-
-  const fetchData = () => {
-    fetch("/api/dashboard/positions")
-      .then((res) => res.json())
-      .then((stocks) => {
-        let positions = [];
-
-        stocks.forEach((stock) => {
-          if (stock.position === true) {
-            positions.push(stock);
-          }
-        });
-
-        // if (!stocks) {
-        //   router.push("/login");
-        // }
-
-        // console.log(positions);
-        setStocks(positions);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
-    fetchData();
-
     const fetchLocalStorage = () => {
       const accBal = localStorage.getItem("accountBalance");
       // console.log(accBal);

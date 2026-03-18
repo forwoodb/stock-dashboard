@@ -25,7 +25,6 @@ const Page = async () => {
   const stocks = JSON.parse(JSON.stringify(data));
 
   return <Stocks stocks={stocks} />;
-  // return <Stocks />;
 };
 
 export default Page;
