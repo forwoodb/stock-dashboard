@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "clsx": "^2.1.1",
     "csv-parse": "^6.1.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.0.2",
