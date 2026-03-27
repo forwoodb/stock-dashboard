@@ -256,7 +256,10 @@ const PositionSizes = ({ merge }) => {
                   {stocks.map((stock) => {
                     if (stock["position"] === true) {
                       return (
-                        <tr key={stock._id}>
+                        <tr
+                          key={stock._id}
+                          className={`${stock["Close"] < stock["10D"] && "text-red-500"}`}
+                        >
                           <td>{stock["ticker"]}</td>
                           <td className="time">{stock["Time"]}</td>
                           <td className="close-price">{stock["Close"]}</td>

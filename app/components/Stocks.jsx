@@ -5,7 +5,7 @@ import Button from "./Button";
 import { useRouter } from "next/navigation";
 import EditForm from "./EditForm";
 
-export default function Stocks({ stocks }) {
+export default function Stocks({ stocks, createStock }) {
   const [newStock, setNewStock] = useState({
     ticker: "",
     company: "",
@@ -21,34 +21,34 @@ export default function Stocks({ stocks }) {
     router.push("/login");
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewStock((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setNewStock((prev) => {
+  //     return {
+  //       ...prev,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("/api/dashboard/stocks", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newStock),
-    }).then(() => {
-      return fetchData();
-    });
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   fetch("/api/dashboard/stocks", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(newStock),
+  //   }).then(() => {
+  //     return fetchData();
+  //   });
 
-    setNewStock({
-      ticker: "",
-      company: "",
-      averageCost: "",
-    });
-  };
+  //   setNewStock({
+  //     ticker: "",
+  //     company: "",
+  //     averageCost: "",
+  //   });
+  // };
 
   const deleteStock = (id) => {
     fetch(`/api/dashboard/stocks/${id}`, {
@@ -107,14 +107,14 @@ export default function Stocks({ stocks }) {
         ) : (
           <>
             <div className="container m-auto">
-              <Form onSubmit={handleSubmit} className="p-4 bg-gray-300">
+              <Form action={createStock} className="p-4 bg-gray-300">
                 <div className="flex flex-col pb-4">
                   <label htmlFor="ticker">Ticker</label>
                   <input
                     type="text"
                     name="ticker"
-                    value={newStock.ticker}
-                    onChange={handleChange}
+                    defaultValue={newStock.ticker}
+                    // onChange={handleChange}
                     id="ticker"
                     className="bg-white"
                   />
@@ -124,8 +124,8 @@ export default function Stocks({ stocks }) {
                   <input
                     type="text"
                     name="company"
-                    value={newStock.company}
-                    onChange={handleChange}
+                    defaultValue={newStock.company}
+                    // onChange={handleChange}
                     id="company"
                     className="bg-white"
                   />
@@ -135,8 +135,8 @@ export default function Stocks({ stocks }) {
                   <input
                     type="text"
                     name="averageCost"
-                    value={newStock.averageCost}
-                    onChange={handleChange}
+                    defaultValue={newStock.averageCost}
+                    // onChange={handleChange}
                     id="averageCost"
                     className="bg-white"
                   />

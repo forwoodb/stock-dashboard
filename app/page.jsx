@@ -1,30 +1,29 @@
-import { cookies } from "next/headers";
 import Stocks from "./components/Stocks";
-import { redirect } from "next/navigation";
-import jwt from "jsonwebtoken";
 import Stock from "@/app/models/Stock";
 import connectDB from "@/app/lib/db";
+import { getUserId } from "./lib/functions";
+import { revalidatePath } from "next/cache";
 
-const Page = async () => {
+const Home = async () => {
   connectDB();
 
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get("jwt-sd");
+  const userId = await getUserId();
 
-  if (!cookie) {
-    redirect("/login");
-  }
-
-  let token = null;
-  if (cookie.value) {
-    token = cookie.value;
-  }
-  const verify = jwt.verify(token, process.env.JWT_SECRET);
-
-  const data = await Stock.find({ userId: verify._id }).lean();
+  const data = await Stock.find({ userId }).lean();
   const stocks = JSON.parse(JSON.stringify(data));
 
-  return <Stocks stocks={stocks} />;
+  const createStock = async (formData) => {
+    "use server";
+
+    const data = Object.fromEntries(formData);
+
+    const newStock = await new Stock({ ...data, userId });
+    await newStock.save();
+
+    revalidatePath("/");
+  };
+
+  return <Stocks stocks={stocks} createStock={createStock} />;
 };
 
-export default Page;
+export default Home;
