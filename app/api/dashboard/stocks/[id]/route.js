@@ -14,10 +14,10 @@ export async function PUT(req, { params }) {
   return NextResponse.json({ msg: "updated" });
 }
 
-export async function DELETE(req, { params }) {
-  const { id } = await params;
-  await Stock.findByIdAndDelete(id);
-  // console.log(id);
+// export async function DELETE(req, { params }) {
+//   const { id } = await params;
+//   await Stock.findByIdAndDelete(id);
+//   // console.log(id);
 
-  return NextResponse.json({ msg: "delete" });
-}
+//   return NextResponse.json({ msg: "delete" });
+// }

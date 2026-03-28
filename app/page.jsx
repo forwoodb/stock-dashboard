@@ -23,7 +23,22 @@ const Home = async () => {
     revalidatePath("/");
   };
 
-  return <Stocks stocks={stocks} createStock={createStock} />;
+  const deleteStock = async (id) => {
+    "use server";
+
+    await Stock.findByIdAndDelete(id);
+
+    revalidatePath("/");
+    console.log(id);
+  };
+
+  return (
+    <Stocks
+      stocks={stocks}
+      createStock={createStock}
+      deleteStock={deleteStock}
+    />
+  );
 };
 
 export default Home;

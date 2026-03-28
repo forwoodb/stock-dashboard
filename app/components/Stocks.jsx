@@ -5,7 +5,7 @@ import Button from "./Button";
 import { useRouter } from "next/navigation";
 import EditForm from "./EditForm";
 
-export default function Stocks({ stocks, createStock }) {
+export default function Stocks({ stocks, createStock, deleteStock }) {
   const [newStock, setNewStock] = useState({
     ticker: "",
     company: "",
@@ -50,17 +50,17 @@ export default function Stocks({ stocks, createStock }) {
   //   });
   // };
 
-  const deleteStock = (id) => {
-    fetch(`/api/dashboard/stocks/${id}`, {
-      method: "DELETE",
-    });
+  // const deleteStock = (id) => {
+  //   fetch(`/api/dashboard/stocks/${id}`, {
+  //     method: "DELETE",
+  //   });
 
-    const list = stocks.filter((item) => {
-      return item._id !== id;
-    });
+  //   const list = stocks.filter((item) => {
+  //     return item._id !== id;
+  //   });
 
-    setStocks(list);
-  };
+  //   setStocks(list);
+  // };
 
   const editStock = (stock) => {
     setEdit(true);
