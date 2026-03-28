@@ -29,7 +29,16 @@ const Home = async () => {
     await Stock.findByIdAndDelete(id);
 
     revalidatePath("/");
-    console.log(id);
+  };
+
+  const updateStockSubmit = async (formData) => {
+    "use server";
+
+    const data = Object.fromEntries(formData);
+    console.log(data._id);
+    await Stock.findByIdAndUpdate(data._id, data);
+
+    revalidatePath("/");
   };
 
   return (
@@ -37,6 +46,7 @@ const Home = async () => {
       stocks={stocks}
       createStock={createStock}
       deleteStock={deleteStock}
+      updateStockSubmit={updateStockSubmit}
     />
   );
 };

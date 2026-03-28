@@ -5,7 +5,12 @@ import Button from "./Button";
 import { useRouter } from "next/navigation";
 import EditForm from "./EditForm";
 
-export default function Stocks({ stocks, createStock, deleteStock }) {
+export default function Stocks({
+  stocks,
+  createStock,
+  deleteStock,
+  updateStockSubmit,
+}) {
   const [newStock, setNewStock] = useState({
     ticker: "",
     company: "",
@@ -21,77 +26,9 @@ export default function Stocks({ stocks, createStock, deleteStock }) {
     router.push("/login");
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setNewStock((prev) => {
-  //     return {
-  //       ...prev,
-  //       [name]: value,
-  //     };
-  //   });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetch("/api/dashboard/stocks", {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(newStock),
-  //   }).then(() => {
-  //     return fetchData();
-  //   });
-
-  //   setNewStock({
-  //     ticker: "",
-  //     company: "",
-  //     averageCost: "",
-  //   });
-  // };
-
-  // const deleteStock = (id) => {
-  //   fetch(`/api/dashboard/stocks/${id}`, {
-  //     method: "DELETE",
-  //   });
-
-  //   const list = stocks.filter((item) => {
-  //     return item._id !== id;
-  //   });
-
-  //   setStocks(list);
-  // };
-
   const editStock = (stock) => {
     setEdit(true);
     setUpdateStock(stock);
-  };
-
-  const handleUpdateChange = (e) => {
-    const { name, value } = e.target;
-
-    setUpdateStock((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleUpdateSubmit = (e) => {
-    e.preventDefault();
-    const id = updateStock._id;
-
-    fetch(`/api/dashboard/stocks/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateStock),
-    }).then(() => {
-      setEdit(false);
-      fetchData();
-    });
   };
 
   return (
@@ -101,8 +38,10 @@ export default function Stocks({ stocks, createStock, deleteStock }) {
         {edit ? (
           <EditForm
             stock={updateStock}
-            change={handleUpdateChange}
-            submit={handleUpdateSubmit}
+            submit={(formData) => {
+              updateStockSubmit(formData);
+              setEdit("");
+            }}
           />
         ) : (
           <>
@@ -114,7 +53,6 @@ export default function Stocks({ stocks, createStock, deleteStock }) {
                     type="text"
                     name="ticker"
                     defaultValue={newStock.ticker}
-                    // onChange={handleChange}
                     id="ticker"
                     className="bg-white"
                   />
@@ -125,7 +63,6 @@ export default function Stocks({ stocks, createStock, deleteStock }) {
                     type="text"
                     name="company"
                     defaultValue={newStock.company}
-                    // onChange={handleChange}
                     id="company"
                     className="bg-white"
                   />
@@ -136,7 +73,6 @@ export default function Stocks({ stocks, createStock, deleteStock }) {
                     type="text"
                     name="averageCost"
                     defaultValue={newStock.averageCost}
-                    // onChange={handleChange}
                     id="averageCost"
                     className="bg-white"
                   />

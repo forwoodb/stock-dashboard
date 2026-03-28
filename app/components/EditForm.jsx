@@ -1,18 +1,17 @@
 import Button from "./Button";
 import Form from "next/form";
 
-const EditForm = ({ stock, submit, change }) => {
+const EditForm = ({ stock, submit }) => {
   return (
     <div className="container m-auto border border-black">
-      <Form onSubmit={submit} className="p-4 bg-gray-300">
+      <Form action={submit} className="p-4 bg-gray-300">
         <div className="flex flex-col pb-4">
           <label htmlFor="ticker" className="form-label">
             Stock Ticker
           </label>
           <input
             name="ticker"
-            value={stock["ticker"]}
-            onChange={change}
+            defaultValue={stock["ticker"]}
             type="text"
             id="ticker"
             className="bg-white"
@@ -24,8 +23,7 @@ const EditForm = ({ stock, submit, change }) => {
           </label>
           <input
             name="company"
-            value={stock["company"]}
-            onChange={change}
+            defaultValue={stock["company"]}
             type="text"
             id="company"
             className="bg-white"
@@ -37,8 +35,7 @@ const EditForm = ({ stock, submit, change }) => {
           </label>
           <input
             name="positionSize"
-            value={stock["positionSize"]}
-            onChange={change}
+            defaultValue={stock["positionSize"]}
             type="text"
             id="positionSize"
             className="bg-white"
@@ -50,13 +47,19 @@ const EditForm = ({ stock, submit, change }) => {
           </label>
           <input
             name="averageCost"
-            value={stock["averageCost"]}
-            onChange={change}
+            defaultValue={stock["averageCost"]}
             type="text"
             id="averageCost"
             className="bg-white"
           />
         </div>
+        <input
+          hidden
+          name="_id"
+          defaultValue={stock["_id"]}
+          type="text"
+          className="bg-white"
+        />
         <Button type="submit" className="bg-green-700 text-white">
           Update
         </Button>
