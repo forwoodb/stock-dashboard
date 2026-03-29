@@ -3,7 +3,7 @@
 import Button from "../components/Button";
 // import { useRouter } from "next/navigation";
 
-const Transactions = ({ trades }) => {
+const Transactions = ({ trades, deleteTrade }) => {
   // const [trades, setTrades] = useState([]);
 
   // const router = useRouter();
@@ -15,9 +15,9 @@ const Transactions = ({ trades }) => {
   //     .catch((err) => console.log(err));
   // }, []);
 
-  const deleteTrade = (id) => {
-    console.log(id);
-  };
+  // const deleteTrade = (id) => {
+  //   console.log(id);
+  // };
 
   const editTrade = (id) => {
     console.log(id);
