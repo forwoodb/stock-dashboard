@@ -7,7 +7,6 @@ import clsx from "clsx";
 
 const Navbar3 = () => {
   const [isActive, setIsActive] = useState(false);
-  const [activeLink, setActiveLink] = useState("/");
 
   const pathname = usePathname();
   return (
@@ -16,13 +15,6 @@ const Navbar3 = () => {
         <div className={`${styles.container}`}>
           <Link href={"/"} className="text-xl font-bold text-white">
             Stock Dashboard
-            {/* <Image
-              src="https://placehold.co/180x120"
-              alt=""
-              width={180}
-              height={120}
-              unoptimized
-            /> */}
           </Link>
           <div
             onClick={() => setIsActive(!isActive)}
@@ -40,20 +32,8 @@ const Navbar3 = () => {
                 className={clsx({
                   "border-b border-white": pathname === "/",
                 })}
-                // onClick={() => setActiveLink("/")}
-                // className={activeLink === "/" && "border-b border-white"}
               >
                 Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"position-sizes"}
-                className={clsx({
-                  "border-b border-white": pathname === "/position-sizes",
-                })}
-              >
-                Position Sizes
               </Link>
             </li>
             <li>
@@ -64,6 +44,16 @@ const Navbar3 = () => {
                 })}
               >
                 Watch List
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={"position-sizes"}
+                className={clsx({
+                  "border-b border-white": pathname === "/position-sizes",
+                })}
+              >
+                Position Sizes
               </Link>
             </li>
             <li>

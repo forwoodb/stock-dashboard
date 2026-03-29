@@ -1,11 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import UpdateBalanceForm from "../components/UpdateBalanceForm";
 import StopLossForm from "../components/StopLossForm";
 import AccountPositions from "../components/AccountPositions";
 import Button from "../components/Button";
-import EditForm from "../components/EditForm";
 import TradeForm from "../components/TradeForm";
 
 const PositionSizes = ({ merge }) => {
@@ -18,19 +16,15 @@ const PositionSizes = ({ merge }) => {
   const [updateAccBal, setUpdateAccBal] = useState("");
   const [stopLoss, setStopLoss] = useState("");
   const [updateStopLoss, setUpdateStopLoss] = useState("");
-  // const [edit, setEdit] = useState(false);
   const [trade, setTrade] = useState(false);
-  // const [updateStock, setUpdateStock] = useState();
   const [transaction, setTransaction] = useState();
 
   useEffect(() => {
     const fetchLocalStorage = () => {
       const accBal = localStorage.getItem("accountBalance");
-      // console.log(accBal);
       setAccountBalance(accBal);
 
       const stopLoss = localStorage.getItem("stopLoss");
-      // console.log(stopLoss);
       setStopLoss(stopLoss);
     };
 
@@ -54,7 +48,6 @@ const PositionSizes = ({ merge }) => {
   const updateSL = (e) => {
     e.preventDefault();
     localStorage.setItem("stopLoss", updateStopLoss);
-    // console.log("click");
   };
 
   const addWatchList = (id) => {
@@ -68,11 +61,8 @@ const PositionSizes = ({ merge }) => {
     setStocks(list);
   };
 
-  // const editStock = (stock) => {
   const tradeStock = (stock) => {
-    // setEdit(true);
     setTrade(true);
-    // setUpdateStock(stock);
     setTransaction({
       ...stock,
       price: stock.Close,
@@ -84,7 +74,6 @@ const PositionSizes = ({ merge }) => {
       oneHundredDayAvg: stock["100D"],
       twoHundredDayAvg: stock["200D"],
     });
-    // console.log(stock);
   };
 
   const handleChange = (e) => {
@@ -97,7 +86,6 @@ const PositionSizes = ({ merge }) => {
     });
   };
 
-  // const submitUpdate = (e) => {
   const submitTrade = (e) => {
     e.preventDefault();
     console.log(transaction);
@@ -128,8 +116,6 @@ const PositionSizes = ({ merge }) => {
   };
 
   const sortTable = (key) => {
-    // console.log(key);
-
     const sorted = stocks
       .map((stock) => {
         stock["5D"] = Number(stock["5D"]);
@@ -144,7 +130,6 @@ const PositionSizes = ({ merge }) => {
         };
       })
       .sort((a, b) => {
-        // const sorted = [...stocks].sort((a, b) => {
         if (key === "ticker") {
           return a[key].localeCompare(b[key]);
         }
@@ -153,7 +138,6 @@ const PositionSizes = ({ merge }) => {
         }
         return Number(a[key]) - Number(b[key]);
       });
-    // console.log(sorted);
     setStocks(sorted);
   };
 
@@ -163,11 +147,6 @@ const PositionSizes = ({ merge }) => {
         <div className="w-[95%] m-auto">
           <h2 className="py-4 text-3xl">Position Sizes</h2>
           {trade ? (
-            // <EditForm
-            //   stock={updateStock}
-            //   submit={submitUpdate}
-            //   change={handleChange}
-            // />
             <TradeForm
               stock={transaction}
               submit={submitTrade}
@@ -196,7 +175,6 @@ const PositionSizes = ({ merge }) => {
                   maxPos={maxPos}
                 />
               </div>
-              {/* <div className="container"> */}
               <table id="stocks-table" className="w-full mt-3">
                 <thead>
                   <tr>
@@ -302,7 +280,7 @@ const PositionSizes = ({ merge }) => {
                               click={() => addWatchList(stock._id)}
                               className="bg-green-700 text-white"
                             >
-                              Watch List
+                              Watchlist
                             </Button>
                           </td>
                         </tr>
@@ -311,7 +289,6 @@ const PositionSizes = ({ merge }) => {
                   })}
                 </tbody>
               </table>
-              {/* </div> */}
             </>
           )}
         </div>

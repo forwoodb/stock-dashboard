@@ -4,11 +4,11 @@ import Transaction from "@/app/models/Transaction";
 
 connectDB();
 
-export async function GET() {
-  const trades = await Transaction.find({});
+// export async function GET() {
+//   const trades = await Transaction.find({});
 
-  return NextResponse.json(trades);
-}
+//   return NextResponse.json(trades);
+// }
 
 export async function POST(req) {
   const body = await req.json();

@@ -1,14 +1,16 @@
 import Transactions from "../components/Transactions";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { getUserId } from "../lib/functions";
+import Transaction from "../models/Transaction";
 
 const Page = async () => {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get("jwt-sd");
-  if (!cookie) {
-    redirect("/login");
-  }
-  return <Transactions />;
+  const userId = await getUserId();
+
+  const data = await Transaction.find().lean();
+  const trades = JSON.parse(JSON.stringify(data));
+
+  console.log(trades);
+
+  return <Transactions trades={trades} />;
 };
 
 export default Page;
