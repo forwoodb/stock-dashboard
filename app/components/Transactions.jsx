@@ -1,24 +1,7 @@
 "use client";
-// import { useEffect, useState } from "react";
 import Button from "../components/Button";
-// import { useRouter } from "next/navigation";
 
 const Transactions = ({ trades, deleteTrade }) => {
-  // const [trades, setTrades] = useState([]);
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   fetch("/api/dashboard/trades")
-  //     .then((res) => res.json())
-  //     .then((data) => setTrades(data))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  // const deleteTrade = (id) => {
-  //   console.log(id);
-  // };
-
   const editTrade = (id) => {
     console.log(id);
   };
