@@ -29,7 +29,13 @@ const Page = async () => {
     return { ...stock, ...(csvRow || {}) };
   });
 
-  return <PositionSizes merge={merge} />;
+  const submitTrade = async (formData) => {
+    "use server";
+
+    console.log(formData);
+  };
+
+  return <PositionSizes merge={merge} submit={submitTrade} />;
 };
 
 export default Page;
