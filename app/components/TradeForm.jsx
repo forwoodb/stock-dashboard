@@ -1,18 +1,21 @@
 import Form from "next/form";
 import Button from "./Button";
 
-const TradeForm = ({ stock, submit, change }) => {
+// const TradeForm = ({ stock, submit, change }) => {
+const TradeForm = ({ stock, submit }) => {
   return (
     <div className="container m-auto border border-black">
-      <Form onSubmit={submit} className="p-4 bg-gray-300">
+      {/* <Form onSubmit={submit} className="p-4 bg-gray-300"> */}
+      <Form action={submit} className="p-4 bg-gray-300">
         <div className="flex flex-col pb-4">
           <label htmlFor="ticker" className="form-label">
             Stock Ticker
           </label>
           <input
             name="ticker"
-            value={stock["ticker"]}
-            onChange={change}
+            defaultValue={stock["ticker"]}
+            // value={stock["ticker"]}
+            // onChange={change}
             type="text"
             id="ticker"
             className="bg-white"
@@ -25,8 +28,9 @@ const TradeForm = ({ stock, submit, change }) => {
           <select
             name="type"
             id="type"
-            value={"buy" || stock["type"]}
-            onChange={change}
+            defaultValue={"buy" || stock["type"]}
+            // value={"buy" || stock["type"]}
+            // onChange={change}
             className="bg-white capitalize"
           >
             <option value="buy">buy</option>
@@ -40,8 +44,9 @@ const TradeForm = ({ stock, submit, change }) => {
           </label>
           <input
             name="price"
-            value={stock["price"]}
-            onChange={change}
+            defaultValue={stock["price"]}
+            // value={stock["price"]}
+            // onChange={change}
             type="text"
             id="price"
             className="bg-white"
@@ -66,8 +71,9 @@ const TradeForm = ({ stock, submit, change }) => {
           </label>
           <input
             name="positionSize"
-            value={stock["positionSize"]}
-            onChange={change}
+            defaultValue={stock["positionSize"]}
+            // value={stock["positionSize"]}
+            // onChange={change}
             type="text"
             id="positionSize"
             className="bg-white"
