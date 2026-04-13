@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import User from "@/app/models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import connectDB from "@/app/lib/db";
+import connectDB from "@/app/lib/mongodb";
 
 connectDB();
 

@@ -1,4 +1,4 @@
-import connectDB from "@/app/lib/db";
+import connectDB from "@/app/lib/mongodb";
 import { NextResponse } from "next/server";
 import Transaction from "@/app/models/Transaction";
 

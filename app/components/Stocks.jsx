@@ -46,7 +46,7 @@ export default function Stocks({
         ) : (
           <>
             <div className="container m-auto">
-              <Form action={createStock} className="p-4 bg-gray-300">
+              <form action={createStock} className="p-4 bg-gray-300">
                 <div className="flex flex-col pb-4">
                   <label htmlFor="ticker">Ticker</label>
                   <input
@@ -79,7 +79,7 @@ export default function Stocks({
                 </div>
 
                 <Button className="bg-green-700 text-white">Add Stock</Button>
-              </Form>
+              </form>
             </div>
             <div className="container py-4 m-auto">
               <table className="table-auto w-full">

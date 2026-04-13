@@ -1,6 +1,6 @@
 import Stocks from "./components/Stocks";
 import Stock from "@/app/models/Stock";
-import connectDB from "@/app/lib/db";
+import connectDB from "@/app/lib/mongodb";
 import { getUserId } from "./lib/functions";
 import { revalidatePath } from "next/cache";
 
@@ -15,7 +15,12 @@ const Home = async () => {
   const createStock = async (formData) => {
     "use server";
 
-    const data = Object.fromEntries(formData);
+    // const data = Object.fromEntries(formData);
+    const ticker = formData.get("ticker");
+    const company = formData.get("company");
+    const averageCost = formData.get("averageCost");
+
+    const data = { ticker, company, averageCost };
 
     const newStock = await new Stock({ ...data, userId });
     await newStock.save();

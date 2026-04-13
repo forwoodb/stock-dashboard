@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
 import Stock from "@/app/models/Stock";
-import connectDB from "../lib/db";
+import connectDB from "../lib/mongodb";
 
 const Page = async () => {
   connectDB();

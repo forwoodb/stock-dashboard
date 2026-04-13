@@ -1,20 +1,19 @@
 "use client";
 import { useState } from "react";
 import Button from "../components/Button";
-import TradeForm from "./TradeForm";
+import EditTradeForm from "./EditTradeForm";
 
-const Transactions = ({ trades, deleteTrade }) => {
+const Transactions = ({ trades, submit, deleteTrade }) => {
   const [edit, setEdit] = useState(false);
   const [editStock, setEditStock] = useState({});
 
   const editTrade = (item) => {
-    console.log(item);
     setEdit(true);
     setEditStock(item);
   };
 
   if (edit) {
-    return <TradeForm stock={editStock} />;
+    return <EditTradeForm stock={editStock} submit={submit} />;
   } else {
     return (
       <div>

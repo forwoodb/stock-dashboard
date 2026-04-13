@@ -17,7 +17,23 @@ const Page = async () => {
     revalidatePath("/trades");
   };
 
-  return <Transactions trades={trades} deleteTrade={deleteTrade} />;
+  const updateTrade = async (formData) => {
+    "use server";
+
+    const data = Object.fromEntries(formData);
+
+    await Transaction.findByIdAndUpdate(data._id, data);
+
+    revalidatePath("/trades");
+  };
+
+  return (
+    <Transactions
+      trades={trades}
+      submit={updateTrade}
+      deleteTrade={deleteTrade}
+    />
+  );
 };
 
 export default Page;
