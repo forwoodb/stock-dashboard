@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt from "jsonwebtoken";
 
+// refactor to two functions: one to get the token, and one to verify the token and return the user id
 export const getUserId = async () => {
   const cookieStore = await cookies();
   const cookie = cookieStore.get("jwt-sd");

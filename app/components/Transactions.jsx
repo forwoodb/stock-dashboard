@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Button from "../components/Button";
+import Button from "./Button";
 import EditTradeForm from "./EditTradeForm";
 
 const Transactions = ({ trades, submit, deleteTrade }) => {

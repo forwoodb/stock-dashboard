@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import UpdateBalanceForm from "../components/UpdateBalanceForm";
-import StopLossForm from "../components/StopLossForm";
-import AccountPositions from "../components/AccountPositions";
-import Button from "../components/Button";
-import TradeForm from "../components/TradeForm";
+import UpdateBalanceForm from "./UpdateBalanceForm";
+import StopLossForm from "./StopLossForm";
+import AccountPositions from "./AccountPositions";
+import Button from "./Button";
+import TradeForm from "./TradeForm";
 
 const PositionSizes = ({ merge }) => {
   const [stocks, setStocks] = useState(
