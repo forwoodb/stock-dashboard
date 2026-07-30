@@ -4,7 +4,7 @@ import { getUserId } from "../lib/functions";
 import Transaction from "../models/Transaction";
 
 const Page = async () => {
-  const userId = await getUserId();
+  // const userId = await getUserId();
 
   const data = await Transaction.find().lean();
   const trades = JSON.parse(JSON.stringify(data));

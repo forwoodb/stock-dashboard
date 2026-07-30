@@ -11,14 +11,15 @@ import { getUserId } from "../lib/functions";
 const Page = async () => {
   connectDB();
 
-  const userId = await getUserId();
+  // const userId = await getUserId();
 
   // get csv data
   const csv_file = fs.readFileSync("stockData.csv", "utf-8");
   const stockData = parse(csv_file, { columns: true, skip_empty_lines: true });
 
   // get stock data
-  const data = await Stock.find({ userId }).lean(); // <-- "lean" strips mongoose document to js object
+  // const data = await Stock.find({ userId }).lean(); // <-- "lean" strips mongoose document to js object
+  const data = await Stock.find().lean(); // <-- "lean" strips mongoose document to js object
   const stocks = JSON.parse(JSON.stringify(data));
 
   // combine stock data with csv data

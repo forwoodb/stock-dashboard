@@ -10,7 +10,7 @@ const transactionSchema = new mongoose.Schema({
     required: true,
   },
   price: Number,
-  positionSize: {
+  dollarAmount: {
     type: Number,
     required: true,
   },
